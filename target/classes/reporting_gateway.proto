@@ -1,0 +1,81 @@
+syntax = "proto3";
+
+package banquito.switchpagos.reporting.v1;
+
+option java_multiple_files = true;
+option java_package = "com.banquito.switchpagos.reporting.grpc";
+option java_outer_classname = "ReportingGatewayProto";
+
+service ReportingGatewayService {
+  rpc GetBatchSummary(ReportingBatchIdGrpcRequest) returns (BatchSummaryGrpcResponse);
+  rpc GetNoveltyReport(ReportingBatchIdGrpcRequest) returns (GeneratedFileGrpcResponse);
+  rpc GetCorporateReceipt(ReportingBatchIdGrpcRequest) returns (CorporateReceiptGrpcResponse);
+  rpc GetClearingFile(ReportingBatchIdGrpcRequest) returns (GeneratedFileGrpcResponse);
+}
+
+message ReportingBatchIdGrpcRequest {
+  string batch_id = 1;
+}
+
+message BatchSummaryGrpcResponse {
+  string batch_id = 1;
+  string correlation_id = 2;
+  string company_ruc = 3;
+  string source_account_number = 4;
+  string core_funding_id = 5;
+  int32 expected_total_lines = 6;
+  int32 observed_lines = 7;
+  int32 final_result_lines = 8;
+  int32 on_us_credited_lines = 9;
+  int32 off_us_included_lines = 10;
+  int32 rejected_lines = 11;
+  int32 failed_lines = 12;
+  int32 billable_lines = 13;
+  string control_amount = 14;
+  string processed_amount = 15;
+  string remaining_amount = 16;
+  string currency = 17;
+  string status = 18;
+  string completed_at = 19;
+  string updated_at = 20;
+}
+
+message GeneratedFileGrpcResponse {
+  string batch_id = 1;
+  string document_id = 2;
+  string status = 3;
+  string file_name = 4;
+  string file_path = 5;
+  string content_type = 6;
+  string content = 7;
+  string generated_at = 8;
+  int32 total_lines = 9;
+}
+
+message CorporateReceiptGrpcResponse {
+  string batch_id = 1;
+  string receipt_id = 2;
+  string file_name = 3;
+  string file_path = 4;
+  string content = 5;
+  string generated_at = 6;
+  string company_ruc = 7;
+  string source_account_number = 8;
+  int32 total_received_lines = 9;
+  int32 successful_on_us_lines = 10;
+  int32 included_off_us_lines = 11;
+  int32 rejected_lines = 12;
+  int32 failed_lines = 13;
+  int32 billable_lines = 14;
+  string total_control_amount = 15;
+  string total_processed_amount = 16;
+  string remaining_amount = 17;
+  string released_amount = 18;
+  string unit_fee = 19;
+  string commission_subtotal = 20;
+  string tax_amount = 21;
+  string total_charged_amount = 22;
+  string currency = 23;
+  string billing_status = 24;
+  string core_commission_charge_id = 25;
+}

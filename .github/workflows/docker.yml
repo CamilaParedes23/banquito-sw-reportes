@@ -24,11 +24,11 @@ jobs:
 
       - name: Build image
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/banquito-sw-reportes:latest -f Docker/Dockerfile .
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/banquito-sw-reportes:prod -f Docker/Dockerfile .
 
       - name: Push image
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/banquito-sw-reportes:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/banquito-sw-reportes:prod
 
       - name: Trigger Infra Deploy
         run: |
